@@ -1,0 +1,159 @@
+/* Apply to whole page */
+body {
+    background-color: black;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Register container */
+.register-container {
+    background-color: red;
+    width: 350px;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+/* Form inputs */
+.register-container input,
+.register-container select,
+.register-container button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+}
+
+/* Register button */
+.register-container button {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.register-container button:hover {
+    background-color: grey;
+}
+
+/* Login link */
+.register-container p {
+    color: white;
+}
+
+.register-container a {
+    color: black;
+    font-weight: bold;
+}
+/* Apply to whole page */
+body {
+    background-color: black;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    color: white;
+    text-align: center;
+}
+
+/* Home container */
+.home-container {
+    background-color: red;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(255, 0, 0, 0.5);
+}
+
+/* Headings */
+h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+/* Button container */
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* Buttons */
+.btn {
+    background-color: black;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background-color: grey;
+}
+body {
+    background-color: black;
+    color: white;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: rgba(255, 0, 0, 0.9); /* Red background with transparency */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px white;
+    text-align: center;
+    width: 300px;
+}
+
+input, select, button {
+    width: 100%;
+    margin: 5px 0;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+button {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
+
+a {
+    color: yellow;
+}
+.alert {
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.alert-danger {
+    background-color: yellow;
+    color: red;
+}
+
+.alert-success {
+    background-color: lightgreen;
+    color: green;
+}
