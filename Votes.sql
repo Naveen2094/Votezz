@@ -1,7 +1,5 @@
 CREATE TABLE votes (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
-    candidate_id INT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(id),
-    FOREIGN KEY (candidate_id) REFERENCES candidates(id)
+    id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    voter_id VARCHAR(100) NOT NULL,
+    candidate_id VARCHAR(10) NOT NULL
 );
