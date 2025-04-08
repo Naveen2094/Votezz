@@ -1,159 +1,271 @@
-/* Apply to whole page */
-body {
-    background-color: black;
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+/* General Reset */
+* {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
-/* Register container */
-.register-container {
-    background-color: red;
-    width: 350px;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
+/* Background Animation */
+body {
+    background: linear-gradient(-45deg, #200000, #400000, #600000, #800000);
+    background-size: 400% 400%;
+    animation: gradientBG 8s ease infinite;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Form inputs */
-.register-container input,
-.register-container select,
-.register-container button {
+/* Gradient Animation */
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Navigation Bar */
+.navbar {
+    position: absolute;
+    top: 0;
     width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: none;
-    border-radius: 5px;
-}
-
-/* Register button */
-.register-container button {
-    background-color: black;
-    color: white;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.register-container button:hover {
-    background-color: grey;
-}
-
-/* Login link */
-.register-container p {
-    color: white;
-}
-
-.register-container a {
-    color: black;
-    font-weight: bold;
-}
-/* Apply to whole page */
-body {
-    background-color: black;
-    font-family: Arial, sans-serif;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 15px 0;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    height: 100vh;
-    margin: 0;
-    color: white;
-    text-align: center;
+    padding: 0 50px;
 }
 
-/* Home container */
+.logo {
+    font-size: 24px;
+    font-weight: 600;
+    color: red;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links li {
+    margin: 0 15px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: red;
+}
+
+/* Home Container */
 .home-container {
-    background-color: red;
+    background: rgba(0, 0, 0, 0.8);
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(255, 0, 0, 0.5);
+    text-align: center;
+    box-shadow: 0px 0px 15px rgba(255, 0, 0, 0.5);
 }
 
-/* Headings */
-h1 {
-    font-size: 28px;
-    margin-bottom: 10px;
+.home-container h1 {
+    color: white;
 }
 
-p {
-    font-size: 18px;
+.highlight {
+    color: red;
+}
+
+.home-container p {
+    color: #ddd;
     margin-bottom: 20px;
 }
 
-/* Button container */
+/* Buttons */
 .button-container {
     display: flex;
     justify-content: center;
     gap: 15px;
 }
 
-/* Buttons */
 .btn {
-    background-color: black;
+    background: red;
     color: white;
     padding: 10px 20px;
     text-decoration: none;
     border-radius: 5px;
-    font-size: 16px;
+    font-weight: bold;
     transition: 0.3s;
 }
 
 .btn:hover {
-    background-color: grey;
+    background: white;
+    color: red;
+}
+/* New User Message Styling */
+.new-user-message {
+    font-size: 16px;
+    margin-top: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: #333;
+    font-weight: 400;
+}
+
+.new-user-message a {
+    text-decoration: none;
+    color: #ff6f61; /* Matching theme color */
+}
+
+.new-user-message a:hover {
+    color: #e55f53; /* Slightly darker shade on hover */
 }
 body {
-    background-color: black;
-    color: white;
+    background-color: #121212; /* Dark background */
+    color: #ffffff; /* White text for contrast */
     font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
     margin: 0;
+    padding: 0;
 }
 
-.container {
-    background-color: rgba(255, 0, 0, 0.9); /* Red background with transparency */
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px white;
-    text-align: center;
-    width: 300px;
-}
-
-input, select, button {
-    width: 100%;
-    margin: 5px 0;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-}
-
-button {
+header {
     background-color: black;
-    color: white;
-    cursor: pointer;
-}
-
-a {
-    color: yellow;
-}
-.alert {
+    color: red;
     padding: 10px;
-    border-radius: 5px;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 10px;
+    text-align: left;
+    font-size: 24px;
 }
 
-.alert-danger {
-    background-color: yellow;
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    text-align: right;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+}
+
+nav ul li a.active {
+    font-weight: bold;
+    color: red;
+}
+.btn {
+    transition: all 0.3s ease-in-out;
+}
+.register-container {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0px 0px 15px rgba(255, 0, 0, 0.5);
+    width: 350px;
+    margin: auto;
+}
+
+.register-container h2 {
+    color: white;
+}
+
+.register-container .highlight {
     color: red;
 }
 
-.alert-success {
-    background-color: lightgreen;
-    color: green;
+.register-container input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid red;
+    border-radius: 5px;
+    background: black;
+    color: white;
+}
+
+.register-container input::placeholder {
+    color: gray;
+}
+
+.btn {
+    background: red;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: 0.3s;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: white;
+    color: red;
+}
+
+.new-user-message {
+    font-size: 16px;
+    margin-top: 20px;
+    color: #ddd;
+}
+/* Login Page Styling */
+.login-container {
+    background: red;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.8);
+    width: 350px;
+    margin: auto;
+    margin-top: 100px;
+}
+
+.login-container h2 {
+    color: white;
+    font-weight: bold;
+}
+
+.login-container input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.login-container input:focus {
+    outline: none;
+    border: 2px solid black;
+}
+
+.login-container .btn {
+    width: 100%;
+    background: black;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 16px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.login-container .btn:hover {
+    background: white;
+    color: black;
 }
