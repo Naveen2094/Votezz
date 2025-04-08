@@ -2,187 +2,202 @@
 session_start();
 include 'db_connect.php';
 
-// Check if the user is an admin
-if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
-    header("Location: login.php?error=Unauthorized access");
+if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {    header("Location: login.php");
     exit();
 }
 
-// Handle adding candidates
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_candidate'])) {
-    $name = mysqli_real_escape_string($conn, $_POST['candidate_name']);
-    $query = "INSERT INTO candidates (name, votes) VALUES ('$name', 0)";
-    if (mysqli_query($conn, $query)) {
-        $_SESSION['success_message'] = "Candidate added successfully!";
-    } else {
-        $_SESSION['error_message'] = "Failed to add candidate.";
-    }
-    header("Location: admin.php");
-    exit();
+// Add Candidate
+if (isset($_POST['add_candidate'])) {
+    $id = $_POST['candidate_id'];
+    $name = $_POST['candidate_name'];
+    $party = $_POST['party_name'];
+    $insert = "INSERT INTO candidates (id, name, party, votes) VALUES ('$id', '$name', '$party', 0)";
+    mysqli_query($conn, $insert);
 }
 
-// Handle removing candidates
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['remove_candidate'])) {
-    $id = intval($_POST['candidate_id']);
-    $query = "DELETE FROM candidates WHERE id='$id'";
-    if (mysqli_query($conn, $query)) {
-        $_SESSION['success_message'] = "Candidate removed successfully!";
-    } else {
-        $_SESSION['error_message'] = "Failed to remove candidate.";
-    }
-    header("Location: admin.php");
-    exit();
+// Remove Candidate
+if (isset($_POST['remove_candidate'])) {
+    $id = $_POST['remove_id'];
+    mysqli_query($conn, "DELETE FROM candidates WHERE id='$id'");
 }
 
-// Fetch candidates (force fresh data)
-$result = mysqli_query($conn, "SELECT * FROM candidates");
-$candidates = mysqli_fetch_all($result, MYSQLI_ASSOC);
+// Fetch Candidates
+$candidate_result = mysqli_query($conn, "SELECT * FROM candidates");
+$candidates = [];
+while ($row = mysqli_fetch_assoc($candidate_result)) {
+    $candidates[] = $row;
+}
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Admin Panel - Manage Candidates</title>
     <style>
-        body {
-            background-color: black;
-            color: white;
-            text-align: center;
-            font-family: Arial, sans-serif;
-        }
-        .container {
-            width: 60%;
-            margin: auto;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
-        th, td {
-            border: 1px solid white;
-            padding: 8px;
-            text-align: center;
-        }
-        th {
-            background-color: red;
-        }
-        input, button {
-            padding: 8px;
-            margin-top: 5px;
-            border: none;
-            border-radius: 5px;
-        }
-        button {
-            background-color: red;
-            color: white;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: darkred;
-        }
-        .delete-btn {
-            background-color: darkred;
-            color: white;
-            padding: 5px;
-            border: none;
-            cursor: pointer;
-        }
-        .delete-btn:hover {
-            background-color: red;
-        }
-        .chart-container {
-            width: 60%;
-            margin: auto;
-            background-color: rgba(255, 0, 0, 0.9);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 20px white;
-        }
-    </style>
+    /* Background Animation */
+    body {
+        background: linear-gradient(-45deg, #200000, #400000, #600000, #800000);
+        background-size: 400% 400%;
+        animation: gradientBG 8s ease infinite;
+        height: 100vh;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        color: white;
+        text-align: center;
+    }
+
+    @keyframes gradientBG {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    h2 {
+        margin-top: 20px;
+    }
+
+    input, button {
+        padding: 8px;
+        margin: 5px;
+        border: none;
+        border-radius: 5px;
+    }
+
+    input {
+        width: 150px;
+    }
+
+    button, .remove-btn {
+        background-color: red;
+        color: white;
+        cursor: pointer;
+    }
+
+    table {
+        width: 90%;
+        margin: 20px auto;
+        border-collapse: collapse;
+        background-color: #111;
+    }
+
+    th, td {
+        padding: 12px;
+        border: 1px solid red;
+    }
+
+    th {
+        background-color: black;
+        color: red;
+    }
+
+    td {
+        color: white;
+    }
+
+    canvas {
+        margin: 30px auto;
+        display: block;
+        max-width: 80%;
+    }
+
+    .logout {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        background-color: red;
+        padding: 5px 10px;
+        border-radius: 5px;
+        color: white;
+        text-decoration: none;
+    }
+
+</style>
+
 </head>
 <body>
 
-    <div class="container">
-        <h2>Admin Dashboard</h2>
-        <a href="logout.php" style="color: red;">Logout</a>
+<a class="logout" href="logout.php">Logout</a>
 
-        <h3>Candidate List</h3>
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Votes</th>
-                <th>Action</th>
-            </tr>
-            <?php foreach ($candidates as $candidate) : ?>
-                <tr>
-                    <td><?= $candidate['id'] ?></td>
-                    <td><?= htmlspecialchars($candidate['name']) ?></td>
-                    <td><?= $candidate['votes'] ?></td>
-                    <td>
-                        <form method="post">
-                            <input type="hidden" name="candidate_id" value="<?= $candidate['id'] ?>">
-                            <button type="submit" name="remove_candidate" class="delete-btn">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </table>
+<h2>Admin Panel - Manage Candidates</h2>
 
-        <h3>Add Candidate</h3>
-        <form method="POST">
-            <input type="text" name="candidate_name" placeholder="Candidate Name" required>
-            <button type="submit" name="add_candidate">Add</button>
-        </form>
+<form method="POST">
+    <input type="text" name="candidate_id" placeholder="Candidate ID" required>
+    <input type="text" name="candidate_name" placeholder="Candidate Name" required>
+    <input type="text" name="party_name" placeholder="Party Name" required>
+    <button type="submit" name="add_candidate">Add Candidate</button>
+</form>
 
-        <h3>Vote Count</h3>
-        <div class="chart-container">
-            <canvas id="voteChart"></canvas>
-        </div>
+<table>
+    <tr>
+        <th>Candidate ID</th>
+        <th>Candidate Name</th>
+        <th>Party</th>
+        <th>Votes</th>
+        <th>Action</th>
+    </tr>
+    <?php foreach ($candidates as $candidate): ?>
+    <tr>
+        <td><?php echo $candidate['id']; ?></td>
+        <td><?php echo $candidate['name']; ?></td>
+        <td><?php echo $candidate['party']; ?></td>
+        <td><?php echo $candidate['votes']; ?></td>
+        <td>
+            <form method="POST" style="display:inline;">
+                <input type="hidden" name="remove_id" value="<?php echo $candidate['id']; ?>">
+                <button class="remove-btn" type="submit" name="remove_candidate">Remove</button>
+            </form>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+</table>
 
-    </div>
+<h2>Vote Count Chart</h2>
+<canvas id="voteChart" width="600" height="300"></canvas>
 
-    <script>
-        const names = <?= json_encode(array_column($candidates, 'name')) ?>;
-        const votes = <?= json_encode(array_column($candidates, 'votes')) ?>;
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('voteChart').getContext('2d');
 
-        const ctx = document.getElementById('voteChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: names,
-                datasets: [{
-                    label: 'Votes',
-                    data: votes,
-                    backgroundColor: 'white',
-                    borderColor: 'black',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        max: 10,
-                        ticks: { color: 'white' }
-                    },
-                    x: {
-                        ticks: { color: 'white' }
-                    }
+    const candidates = <?php echo json_encode($candidates); ?>;
+    const names = candidates.map(c => c.name);
+    const votes = candidates.map(c => parseInt(c.votes));
+
+    const maxVotes = Math.max(...votes);
+    const leaderIndex = votes.indexOf(maxVotes);
+    const barColors = votes.map((v, i) => i === leaderIndex && maxVotes > 0 ? 'green' : 'red');
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: names,
+            datasets: [{
+                label: 'Votes',
+                data: votes,
+                backgroundColor: barColors,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: { color: 'white' }
                 },
-                plugins: {
-                    legend: {
-                        labels: { color: 'white' }
+                x: {
+                    ticks: { color: 'white' }
+                }
+            },
+            plugins: {
+                legend: {
+                    labels: {
+                        color: 'white'
                     }
                 }
             }
-        });
-    </script>
+        }
+    });
+</script>
 
 </body>
 </html>
