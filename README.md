@@ -19,19 +19,19 @@ Votezz is a secure and dynamic web-based **Voting and Election Management System
 ## 🖼️ Screenshots
 
 ### 🏠 Home Page
-![Home Page](images/Homepage.png)
+![Home Page](Images/Homepage.png)
 
 ### 📝 Register Page
-![Register Page](images/Registerpage.png)
+![Register Page](Images/Registerpage.png)
 
 ### 🔐 Login Page
-![Login Page](images/Loginpage.png)
+![Login Page](Images/Loginpage.png)
 
 ### 🧑‍💼 Admin Panel
-![Admin Panel](images/Adminpage.png)
+![Admin Panel](Images/Adminpage.png)
 
 ### 🗳️ Voting Page
-![Voting Page](images/Votingpage.png)
+![Voting Page](Images/Votingpage.png)
 ---
 
 ## 🗄️ Database Structure
