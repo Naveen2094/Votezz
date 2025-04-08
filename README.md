@@ -16,7 +16,22 @@ Votezz is a secure and dynamic web-based **Voting and Election Management System
 - **Backend**: PHP
 - **Database**: MySQL (via phpMyAdmin)
 - **Tools**: XAMPP
+## 🖼️ Screenshots
 
+### 🏠 Home Page
+![Home Page](images/Homepage.png)
+
+### 📝 Register Page
+![Register Page](images/Registerpage.png)
+
+### 🔐 Login Page
+![Login Page](images/Loginpage.png)
+
+### 🧑‍💼 Admin Panel
+![Admin Panel](images/Adminpage.png)
+
+### 🗳️ Voting Page
+![Voting Page](images/Votingpage.png)
 ---
 
 ## 🗄️ Database Structure
