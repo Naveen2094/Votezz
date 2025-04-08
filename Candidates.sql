@@ -1,6 +1,6 @@
 CREATE TABLE candidates (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    party VARCHAR(255),
-    votes INT DEFAULT 0
+    id VARCHAR(3) NOT NULL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    party VARCHAR(100) NOT NULL,
+    votes INT(11) DEFAULT 0
 );
