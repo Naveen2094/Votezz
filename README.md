@@ -1,90 +1,89 @@
-Votezz - Election and Voting Database Management System
+# 🗳️ Votezz - Online Voting System
 
-📌 Project Overview
+Votezz is a secure and dynamic web-based **Voting and Election Management System** created using **PHP** and **MySQL**, with a sleek red and black themed UI.
 
-Votezz is a web-based Election and Voting Database Management System that allows users to cast votes securely and enables admins to manage elections efficiently. Built using PHP and MySQL (XAMPP), it provides an intuitive and user-friendly interface for both voters and administrators.
+## 🎯 Project Objectives
+- Allow users to register, log in, and vote securely.
+- Admin can manage candidates and view vote counts.
+- Prevent duplicate voting by restricting users to one vote.
+- Display results visually with a bar chart.
 
-🎯 Features
+---
 
-User Features
+## 🛠️ Tech Stack
 
-📝 User Registration – New users can register with their details.
+- **Frontend**: HTML, CSS, JavaScript
+- **Backend**: PHP
+- **Database**: MySQL (via phpMyAdmin)
+- **Tools**: XAMPP
 
-🔐 Login System – Secure login authentication for voters.
+---
 
-🗳 Voting Page – Users can cast their vote 
+## 🗄️ Database Structure
 
-Admin Features
+**Database Name**: `votezz2_db`
 
-👤 Admin Login – Admins can log in using predefined credentials.
+### 1. `users` Table
 
-📋 Manage Candidates – Add or remove candidates for elections.
+| Column      | Type          | Description            |
+|-------------|---------------|------------------------|
+| id          | int(11)       | Auto Increment (PK)    |
+| name        | varchar(100)  | User's full name       |
+| mobile      | varchar(10)   | Mobile number          |
+| age         | int(11)       | Age of the user        |
+| voter_id    | varchar(10)   | Unique Voter ID        |
+| password    | varchar(255)  | Hashed password        |
 
-📊 Live Vote Count – Displays results with a bar diagram.
+---
 
-🛠 Tech Stack
+### 2. `candidates` Table
 
-Frontend: HTML, CSS
+| Column   | Type           | Description                     |
+|----------|----------------|---------------------------------|
+| id       | varchar(3)     | Candidate ID (PK)               |
+| name     | varchar(100)   | Candidate Name                  |
+| party    | varchar(100)   | Party Name                      |
+| votes    | int(11)        | Vote count (default: 0)         |
 
-Backend: PHP
+---
 
-Database: MySQL (XAMPP)
+### 3. `votes` Table
 
-⚙️ Installation and Setup
+| Column       | Type         | Description                            |
+|--------------|--------------|----------------------------------------|
+| id           | int(11)      | Auto Increment (PK)                    |
+| voter_id     | varchar(100) | ID of the voter (one vote per user)    |
+| candidate_id | varchar(10)  | ID of the candidate voted for          |
 
-Follow these steps to set up Votezz on your local system:
+---
 
-Clone the Repository
+## 🔐 Admin Credentials
 
-git clone https://github.com/yourusername/votezz.git
+- **Name**: Naveen
+- **Voter ID**: CXSPN9373C
+- **Password**: 54321
 
-Move to the Project Directory
+---
 
-cd votezz
+## 🔑 Features
 
-Start XAMPP Server
+✅ User Registration and Login  
+✅ Secure Voting (One vote per user)  
+✅ Admin can Add/Remove Candidates  
+✅ Real-time Vote Counting  
+✅ Bar Chart Visualization of Results  
+✅ Fully Responsive Red-Black UI  
+✅ Red glowing animations on vote and admin pages
 
-Open XAMPP Control Panel and start Apache and MySQL.
+---
 
-Import Database
+## 🚀 How to Run
 
-Open phpMyAdmin and create a database named votezz_db.
-
-Import the votezz_db.sql file from the project directory.
-
-Update Database Configuration
-
-Ensure db_connect.php contains the correct database credentials:
-
-$conn = mysqli_connect("localhost", "root", "", "votezz_db");
-
-Run the Project
-
-Open a web browser and go to:
-
-http://localhost/votezz/
-
-📌 Admin Credentials
-
-Username: Naveen
-
-Password: 123
-
-
-🤝 Contributing
-
-Contributions are welcome! Feel free to fork this repository and submit a pull request.
-
-📜 License
-
-This project is open-source and free to use.
-
-📩 Contact
-
-📧 Email: naveenkumarp2094@gmail.com
-
-💻 LinkedIn: https://www.linkedin.com/in/naveenkumarp20/
-
-
-
-Give a ⭐ if you like this project!
+1. Download and install **XAMPP**.
+2. Place the `votezz` folder inside `htdocs`.
+3. Start **Apache** and **MySQL** via XAMPP.
+4. Go to **phpMyAdmin**:
+   - Create a database named `votezz2_db`.
+   - Import or manually create the 3 tables above.
+5. Access the app in your browser:  
+   `http://localhost/votezz`
