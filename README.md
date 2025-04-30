@@ -22,7 +22,7 @@ Votezz is a secure and dynamic web-based **Voting and Election Management System
 ![Home Page](Images/Homepage.png)
 
 ### 📝 Register Page
-![Register Page](Images/Registerpage.png)
+![Register Page](Images/Register_page.png)
 
 ### 🔐 Login Page
 ![Login Page](Images/Loginpage.png)
